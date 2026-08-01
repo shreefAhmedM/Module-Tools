@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-
 import argparse
 import cowsay
-
 
 def main():
     parser = argparse.ArgumentParser(description="Make animals say things")
