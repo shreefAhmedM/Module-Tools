@@ -8,9 +8,10 @@ parser.add_argument("files", nargs="+")
 
 args = parser.parse_args()
 
-line_number = 1
+
 
 for file in args.files:
+    line_number = 1
     with open(file) as f:
         for line in f:
             if args.b:
@@ -20,7 +21,7 @@ for file in args.files:
                 else:
                     print(line, end="")
             elif args.n:
-                print(f"{line_number:6}\t{line}", end="")
+                print(f"{line_number:6}  {line}", end="")
                 line_number += 1
             else:
                 print(line, end="")

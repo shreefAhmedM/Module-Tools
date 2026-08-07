@@ -14,7 +14,7 @@ for path in args.paths:
         if args.one:
             print(path)
         else:
-            print(path, end=" ")
+            print(path, end="      ")
 print()
 
 # Print directories
@@ -35,4 +35,4 @@ for path in args.paths:
             for file in files:
                 print(file)
         else:
-            print(" ".join(files))
+            print("   ".join(files))
