@@ -21,21 +21,22 @@ for (const arg of args) {
 
 const stats = fs.statSync(target);
 if (stats.isFile()) {
-    console.log(path.basename(target));
+    console.log(target);
 } else {
 
     let files = fs.readdirSync(target);
 
-    if (!showAll) {
-        files = files.filter(file => !file.startsWith("."));
-    }
-    if (onePerLine) {
+if (showAll) {
+    files = [".", "..", ...files];
+} else {
+    files = files.filter(file => !file.startsWith("."));
+}
 
-        for (const file of files) {
-            console.log(file);
-        }
-
-    } else {
-        console.log(files.join(" "));
+if (onePerLine) {
+    for (const file of files) {
+        console.log(file);
     }
+} else {
+    console.log(files.join("   "));
+}
 }
