@@ -8,7 +8,7 @@ let showLines = false;
 let fileNames = [];
 
 // Check flags and file names
-for (let item of args) {
+for (const item of args) {
     if (item === "-l") {
         showLines = true;
     } else if (item === "-w") {
@@ -27,20 +27,43 @@ if (!showLines && !showWords && !showChars) {
     showChars = true;
 }
 
-for (let fileName of fileNames) {
-    let text = fs.readFileSync(fileName, "utf8");
+let grandLines = 0;
+let grandWords = 0;
+let grandChars = 0;
 
-    let totalLines = text.split("\n").length - 1;
-    let totalWords = text.trim().split(/\s+/).length;
-    let totalChars = Buffer.byteLength(text);
+for (const fileName of fileNames) {
+    const text = fs.readFileSync(fileName, "utf8");
+
+    const totalLines = text.split("\n").length - 1;
+
+    const trimmed = text.trim();
+    const totalWords = trimmed ? trimmed.split(/\s+/).length : 0;
+
+    const totalChars = Buffer.byteLength(text);
+
+    grandLines += totalLines;
+    grandWords += totalWords;
+    grandChars += totalChars;
 
     let output = "";
 
-    if (showLines) output += totalLines + " ";
-    if (showWords) output += totalWords + " ";
-    if (showChars) output += totalChars + " ";
+    if (showLines) output += String(totalLines).padStart(8);
+    if (showWords) output += String(totalWords).padStart(8);
+    if (showChars) output += String(totalChars).padStart(8);
 
-    output += fileName;
+    output += " " + fileName;
+
+    console.log(output);
+}
+
+if (fileNames.length > 1) {
+    let output = "";
+
+    if (showLines) output += String(grandLines).padStart(8);
+    if (showWords) output += String(grandWords).padStart(8);
+    if (showChars) output += String(grandChars).padStart(8);
+
+    output += " total";
 
     console.log(output);
 }
