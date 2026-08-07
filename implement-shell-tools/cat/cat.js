@@ -12,7 +12,7 @@ for (const arg of args) {
         flag = arg;
         continue;
     }
-
+  let lineNumber = 1;
     // Read the file
     const content = fs.readFileSync(arg, "utf8");
 
@@ -27,21 +27,17 @@ for (const arg of args) {
  
     for (const line of lines) {
 
-        if (flag === "-n") {
-            console.log(`${lineNumber}\t${line}`);
-            lineNumber++;
-        }
-
-        else if (flag === "-b") {
-
-            if (line === "") {
-                console.log("");
-            } else {
-              console.log(`${String(lineNumber).padStart(6)}  ${line}`);
-                lineNumber++;
-            }
-
-        }
+     if (flag === "-n") {
+    console.log(`${String(lineNumber).padStart(6)}  ${line}`);;
+    lineNumber++;
+} else if (flag === "-b") {
+    if (line === "") {
+        console.log("");
+    } else {
+        console.log(`${String(lineNumber).padStart(6)}  ${line}`);;
+        lineNumber++;
+    }
+}
 
         else {
             console.log(line);
