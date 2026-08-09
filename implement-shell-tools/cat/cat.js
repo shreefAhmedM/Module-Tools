@@ -27,7 +27,7 @@ for (const arg of args) {
     for (const line of lines) {
 
         if (flag === "-n") {
-            console.log(`${String(lineNumber).padStart(6)}  ${line}`);;
+            console.log(`${String(lineNumber).padStart(6)}\t${line}`);
             lineNumber++;
         } else if (flag === "-b") {
             if (line === "") {
