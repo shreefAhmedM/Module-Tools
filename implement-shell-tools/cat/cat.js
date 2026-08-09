@@ -3,7 +3,6 @@ const fs = require("fs");
 const args = process.argv.slice(2);
 
 let flag = "";
-let lineNumber = 1;
 
 for (const arg of args) {
 
@@ -12,7 +11,7 @@ for (const arg of args) {
         flag = arg;
         continue;
     }
-  let lineNumber = 1;
+    let lineNumber = 1;
     // Read the file
     const content = fs.readFileSync(arg, "utf8");
 
@@ -24,22 +23,20 @@ for (const arg of args) {
         lines.pop();
     }
 
- 
+
     for (const line of lines) {
 
-     if (flag === "-n") {
-    console.log(`${String(lineNumber).padStart(6)}  ${line}`);;
-    lineNumber++;
-} else if (flag === "-b") {
-    if (line === "") {
-        console.log("");
-    } else {
-        console.log(`${String(lineNumber).padStart(6)}  ${line}`);;
-        lineNumber++;
-    }
-}
-
-        else {
+        if (flag === "-n") {
+            console.log(`${String(lineNumber).padStart(6)}  ${line}`);;
+            lineNumber++;
+        } else if (flag === "-b") {
+            if (line === "") {
+                console.log("");
+            } else {
+                console.log(`${String(lineNumber).padStart(6)}\t${line}`);
+                lineNumber++;
+            }
+        } else {
             console.log(line);
         }
     }
