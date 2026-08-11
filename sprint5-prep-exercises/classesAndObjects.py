@@ -11,3 +11,7 @@ print(imran.address)
 eliza = Person("Eliza", 34, "Arch Linux")
 print(eliza.name)
 print(eliza.address)
+
+
+# The error means that address doesn't exist in the Person class. We can only 
+# access attributes that were defined in the class, such as name, age, and preferred_operating_system.

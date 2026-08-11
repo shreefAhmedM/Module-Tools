@@ -33,3 +33,7 @@ total_pence = sum_balances(balances)
 total_string = format_pence_as_string(total_pence)
 
 print(f"The bank accounts total {total_string}")
+def is_adult(person: Person) -> bool:
+    return person.age >= 18
+
+print(is_adult(imran))
