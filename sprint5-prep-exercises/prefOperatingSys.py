@@ -40,3 +40,9 @@ laptops = [
 for person in people:
     possible_laptops = find_possible_laptops(laptops, person)
     print(f"Possible laptops for {person.name}: {possible_laptops}")
+
+
+
+    # Yes, at first, when I changed str to list[str],
+    #  mypy showed errors as I expected because I was still passing strings instead of lists
+    # Then I changed the field name to the plural form `preferred_operating_systems` to match the fact that it is now a list.
