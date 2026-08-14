@@ -33,11 +33,8 @@ laptops = [
 ]
 
 
-# Get the person's name
 name = input("What is your name? ")
 
-
-# Get and convert age
 try:
     age = int(input("What is your age? "))
 except ValueError:
@@ -45,11 +42,19 @@ except ValueError:
     sys.exit(1)
 
 
-# Get and convert operating system
+print("Available operating systems:")
+for os in OperatingSystem:
+    print(os.value)
+
 try:
-    os_input = input("What is your preferred operating system? ")
-    operating_system = OperatingSystem(os_input)
-except ValueError:
+    os_input = input("What is your preferred operating system? ").strip().lower()
+
+    operating_system = next(
+        os for os in OperatingSystem
+        if os.value.lower() == os_input
+    )
+
+except StopIteration:
     print("Invalid operating system.", file=sys.stderr)
     sys.exit(1)
 
@@ -61,12 +66,10 @@ person = Person(
 )
 
 
-# Count laptops with the person's preferred OS
 number_available = sum(
     laptop.operating_system == person.preferred_operating_system
     for laptop in laptops
 )
-
 
 print(
     f"We have {number_available} laptop(s) with "
@@ -74,8 +77,7 @@ print(
 )
 
 
-# Find the operating system with the most laptops
-counts = {}
+counts: dict[OperatingSystem, int] = {}
 
 for os in OperatingSystem:
     counts[os] = sum(
@@ -85,7 +87,6 @@ for os in OperatingSystem:
 
 
 most_available_os = max(counts, key=counts.get)
-
 
 if most_available_os != person.preferred_operating_system:
     if counts[most_available_os] > number_available:
