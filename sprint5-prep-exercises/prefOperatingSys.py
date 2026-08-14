@@ -20,7 +20,7 @@ class Laptop:
 def find_possible_laptops(laptops: List[Laptop], person: Person) -> List[Laptop]:
     possible_laptops = []
     for laptop in laptops:
-        if laptop.operating_system == person.preferred_operating_systems:
+       if laptop.operating_system in person.preferred_operating_systems:
             possible_laptops.append(laptop)
     return possible_laptops
 
@@ -40,8 +40,6 @@ laptops = [
 for person in people:
     possible_laptops = find_possible_laptops(laptops, person)
     print(f"Possible laptops for {person.name}: {possible_laptops}")
-
-
 
     # Yes, at first, when I changed str to list[str],
     #  mypy showed errors as I expected because I was still passing strings instead of lists
