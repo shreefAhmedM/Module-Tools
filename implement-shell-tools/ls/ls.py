@@ -8,13 +8,23 @@ parser.add_argument("paths", nargs="*", default=["."])
 
 args = parser.parse_args()
 
+
+def get_files(path):
+    files = sorted(os.listdir(path))
+
+    if args.a:
+        return [".", ".."] + files
+
+    return [f for f in files if not f.startswith(".")]
+
+
 # Print all files first
 for path in args.paths:
     if not os.path.isdir(path):
         if args.one:
             print(path)
         else:
-            print(path, end="      ")
+            print(path, end="     ")
 print()
 
 # Print directories
@@ -24,12 +34,7 @@ for path in args.paths:
         if len(args.paths) > 1:
             print(f"\n{path}:")
 
-        files = sorted(os.listdir(path))
-
-        if args.a:
-            files = [".", ".."] + files
-        else:
-            files = [f for f in files if not f.startswith(".")]
+        files = get_files(path)
 
         if args.one:
             for file in files:
