@@ -8,6 +8,23 @@ parser.add_argument("files", nargs="+")
 
 args = parser.parse_args()
 
+
+def format_counts(lines, words, chars):
+    if not args.l and not args.w and not args.c:
+        return f"{lines:8}{words:8}{chars:8}"
+
+    output = ""
+
+    if args.l:
+        output += f"{lines:8}"
+    if args.w:
+        output += f"{words:8}"
+    if args.c:
+        output += f"{chars:8}"
+
+    return output
+
+
 total_lines = 0
 total_words = 0
 total_chars = 0
@@ -27,32 +44,11 @@ for file in args.files:
     total_words += words
     total_chars += chars
 
-    output = ""
-
-    if not args.l and not args.w and not args.c:
-        output += f"{lines:8}{words:8}{chars:8}"
-    else:
-        if args.l:
-            output += f"{lines:8}"
-        if args.w:
-            output += f"{words:8}"
-        if args.c:
-            output += f"{chars:8}"
-
-    print(output, file)
+    print(format_counts(lines, words, chars), file)
 
 
 if len(args.files) > 1:
-    output = ""
-
-    if not args.l and not args.w and not args.c:
-        output += f"{total_lines:8}{total_words:8}{total_chars:8}"
-    else:
-        if args.l:
-            output += f"{total_lines:8}"
-        if args.w:
-            output += f"{total_words:8}"
-        if args.c:
-            output += f"{total_chars:8}"
-
-    print(output, "total")
+    print(
+        format_counts(total_lines, total_words, total_chars),
+        "total"
+    )
